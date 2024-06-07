@@ -38,8 +38,6 @@ public class Player : MonoBehaviour
         playerATK = PlayerManager.instance.playerStatATK;
         playerDEF = PlayerManager.instance.playerStatDEF;
         StartCoroutine("MPRegeneration");
-        
-        player.enabled = true;
     }
 
     void Start()
@@ -56,8 +54,6 @@ public class Player : MonoBehaviour
         playerATK = PlayerManager.instance.playerStatATK;
         playerDEF = PlayerManager.instance.playerStatDEF * reductionRate;
         StartCoroutine("MPRegeneration");
-
-        player.enabled = true;
     }
 
     IEnumerator MPRegeneration() {
