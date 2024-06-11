@@ -18,28 +18,31 @@ public class Enemy : MonoBehaviour
 
     private void Awake() {
         enemySpriteRenderer = GetComponent<SpriteRenderer>();
-        target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
     }
 
     void Start()
     {
+
     }
 
 
     void Update()
     {
-        float distance = Vector3.Distance(transform.position, target.position);
+        if (!PlayerManager.instance.gameOver) {
+            target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+            float distance = Vector3.Distance(transform.position, target.position);
 
-        if (distance <= fiedlOfVision) {
-            MoveToTarget();
-        }
-        if (isHit) {
-            if (_timer >= 0.3f) {
-                enemySpriteRenderer.color = new Color(1, 1, 1, 1);
-                _timer = 0f;
-                isHit = false;
-            } else {
-                _timer += Time.deltaTime;
+            if (distance <= fiedlOfVision) {
+                MoveToTarget();
+            }
+            if (isHit) {
+                if (_timer >= 0.3f) {
+                    enemySpriteRenderer.color = new Color(1, 1, 1, 1);
+                    _timer = 0f;
+                    isHit = false;
+                } else {
+                    _timer += Time.deltaTime;
+                }
             }
         }
     }

@@ -62,6 +62,11 @@ public class PlayerManager : MonoBehaviour
         if (instance == null) {
             instance = this;
         }
+
+        playerStatATK = 1f;
+        playerStatDEF = 1f;
+        playerStatHP = 20f;
+        playerStatMP = 100f;
     }
 
     void Start() {

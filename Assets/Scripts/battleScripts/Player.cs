@@ -6,12 +6,10 @@ public class Player : MonoBehaviour
 {
     [SerializeField]
     private Animator animator;
+    
     private Rigidbody2D playerRigidbody;
-    private Vector2 vector;
     private SpriteRenderer playerSpriteRenderer;
     private BoxCollider2D plyaerCollider;
-    private Skill skill;
-    private Player player;
 
     public bool isLeft = false;
     public float moveSpeed = 10f;
@@ -29,14 +27,13 @@ public class Player : MonoBehaviour
         playerSpriteRenderer = GetComponent<SpriteRenderer>();
         playerRigidbody = GetComponent<Rigidbody2D>();
         plyaerCollider = GetComponent<BoxCollider2D>();
-        skill = GetComponent<Skill>();
 
-        playerMaxHp = PlayerManager.instance.playerStatHP;
+        // playerMaxHp = PlayerManager.instance.playerStatHP;
         playerCurrentHp = playerMaxHp;
-        playerMaxMp = PlayerManager.instance.playerStatMP;
+        // playerMaxMp = PlayerManager.instance.playerStatMP;
         playerCurrentMp = playerMaxMp;
-        playerATK = PlayerManager.instance.playerStatATK;
-        playerDEF = PlayerManager.instance.playerStatDEF;
+        // playerATK = PlayerManager.instance.playerStatATK;
+        // playerDEF = PlayerManager.instance.playerStatDEF;
         StartCoroutine("MPRegeneration");
     }
 
@@ -45,7 +42,6 @@ public class Player : MonoBehaviour
         playerSpriteRenderer = GetComponent<SpriteRenderer>();
         playerRigidbody = GetComponent<Rigidbody2D>();
         plyaerCollider = GetComponent<BoxCollider2D>();
-        skill = GetComponent<Skill>();
 
         playerMaxHp = PlayerManager.instance.playerStatHP;
         playerCurrentHp = playerMaxHp;
@@ -79,29 +75,6 @@ public class Player : MonoBehaviour
             playerCurrentMp = playerMaxMp;
         }
 
-        // if (Input.GetKey(KeyCode.RightArrow)) {
-        //     isLeft = false;
-        //     playerSpriteRenderer.flipX = false;
-        //     animator.SetTrigger("move");
-        // }
-
-        // if (Input.GetKey(KeyCode.LeftArrow)) {
-        //     isLeft = true;
-        //     playerSpriteRenderer.flipX = true;
-        //     animator.SetTrigger("move");
-        // }
-        
-        // if (Input.GetKey(KeyCode.UpArrow)) {
-        //     animator.SetTrigger("move");
-        // }
-
-        // if (Input.GetKey(KeyCode.DownArrow)) {
-        //     animator.SetTrigger("move");
-        // }
-
-        // if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.DownArrow)) {
-        //     animator.SetBool("move", false);
-        // }
 
         if (!animator.GetCurrentAnimatorStateInfo(0).IsName("move")) {
             if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1) {
@@ -120,18 +93,6 @@ public class Player : MonoBehaviour
             }
         }
 
-        // float horizontalInput = Input.GetAxisRaw("Horizontal");
-        // Vector3 moveX = new Vector3(horizontalInput, 0f, 0f);
-        // transform.position += moveX * moveSpeed * Time.deltaTime;
-        
-        // float verticalInput = Input.GetAxisRaw("Vertical");
-        // Vector3 moveY = new Vector3(0f, verticalInput, 0f);
-        // transform.position += moveY * moveSpeed * Time.deltaTime;
-
-        // vector.x = Input.GetAxisRaw("Horizontal");
-        // vector.y = Input.GetAxisRaw("Vertical");
-
-        // playerRigidbody.velocity = vector.normalized * moveSpeed;
 
         float deltaX = Input.GetAxis("Horizontal");
         float deltaY = Input.GetAxis("Vertical");
@@ -160,9 +121,9 @@ public class Player : MonoBehaviour
                 damage = 0;
             }
             playerCurrentHp -= damage;
-            PlayerManager.instance.stylishPoint -= 1f;
-            _isHit = true;
             plyaerCollider.enabled = false;
+            PlayerManager.instance.stylishPoint -= 0.5f;
+            _isHit = true;
             playerSpriteRenderer.color = new Color(1f, 1f, 1f, 0.5f);
         } else if (other.gameObject.tag == "Golem") {
             Enemy hitEnemy = other.gameObject.GetComponent<Enemy>();
@@ -171,9 +132,9 @@ public class Player : MonoBehaviour
                 damage = 0;
             }
             playerCurrentHp -= damage;
-            PlayerManager.instance.stylishPoint -= 1f;
-            _isHit = true;
             plyaerCollider.enabled = false;
+            PlayerManager.instance.stylishPoint -= 0.5f;
+            _isHit = true;
             playerSpriteRenderer.color = new Color(1f, 1f, 1f, 0.5f);
         } else if (other.gameObject.tag == "Eldlich") {
             Enemy hitEnemy = other.gameObject.GetComponent<Enemy>();
@@ -182,9 +143,9 @@ public class Player : MonoBehaviour
                 damage = 0;
             }
             playerCurrentHp -= damage;
-            PlayerManager.instance.stylishPoint -= 2f;
-            _isHit = true;
             plyaerCollider.enabled = false;
+            PlayerManager.instance.stylishPoint -= 1f;
+            _isHit = true;
             playerSpriteRenderer.color = new Color(1f, 1f, 1f, 0.5f);
         }
     }
