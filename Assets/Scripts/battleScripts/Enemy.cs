@@ -14,6 +14,10 @@ public class Enemy : MonoBehaviour
     public float enemyATK = 1.5f;
     public bool isHit = false;
     private float _timer = 0f;
+    private float _xDistance = 0;
+    private float _yDistance = 0;
+    private Vector3 dir;
+    public Animator animator;
     
 
     private void Awake() {
@@ -48,15 +52,47 @@ public class Enemy : MonoBehaviour
     }
 
     private void MoveToTarget() {
-        Vector2 direction = new Vector2(transform.position.x - target.position.x, transform.position.y - target.position.y);
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        Quaternion angleAxis = Quaternion.AngleAxis(angle - 90f, Vector3.forward);
-        Quaternion rotation = Quaternion.Slerp(transform.rotation, angleAxis, PlayerManager.instance.enemySpeed * rotateSpeed * Time.deltaTime);
+        // Vector2 direction = new Vector2(transform.position.x - target.position.x, transform.position.y - target.position.y);
+        _xDistance = transform.position.x - target.position.x;
+        _yDistance = transform.position.y - target.position.y;
+        
 
-        transform.rotation = rotation;
+        if (Mathf.Abs(_xDistance) > Mathf.Abs(_yDistance)) {
+            if (_xDistance > 0) {
+                dir = new Vector3(1, 0, 0);
+                animator.SetTrigger("left");
+            } else if (_xDistance < 0) {
+                dir = new Vector3(-1, 0, 0);
+                animator.SetTrigger("right");
+            }
+        } else if (Mathf.Abs(_xDistance) < Mathf.Abs(_yDistance)) {
+            if (_yDistance > 0) {
+                dir = new Vector3(0, 1, 0);
+                animator.SetTrigger("down");
+            } else if (_xDistance < 0) {
+                dir = new Vector3(0, -1, 0);
+                animator.SetTrigger("up");
+            }
+        } else if (Mathf.Abs(_xDistance) > Mathf.Abs(_yDistance)) {
+            if (_xDistance > 0) {
+                dir = new Vector3(1, 0, 0);
+                animator.SetTrigger("left");
+            } else if (_xDistance < 0) {
+                dir = new Vector3(-1, 0, 0);
+                animator.SetTrigger("right");
+            }
+        }
 
-        Vector3 dir = direction;
-        transform.position += (-dir.normalized * moveSpeed * Time.deltaTime * PlayerManager.instance.enemySpeed);
+
+        // float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        // Quaternion angleAxis = Quaternion.AngleAxis(angle - 90f, Vector3.forward);
+        // Quaternion rotation = Quaternion.Slerp(transform.rotation, angleAxis, PlayerManager.instance.enemySpeed * rotateSpeed * Time.deltaTime);
+
+        // transform.rotation = rotation;
+
+
+
+        transform.position += (-dir * moveSpeed * Time.deltaTime * PlayerManager.instance.enemySpeed);
     }
 
 

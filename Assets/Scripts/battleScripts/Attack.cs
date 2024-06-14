@@ -35,11 +35,15 @@ public class Attack : MonoBehaviour
         if (PlayerManager.instance.fever) {
             AttackReinforced(true);
             if (Input.GetKeyDown(KeyCode.A) && _count == 1 && _ready) {
+                AudioSource SwordSound = GetComponent<AudioSource>();
+                SwordSound.Play();
                 _attacked = true;
                 _ready = false;
                 animator.SetTrigger("reinforced2");
                 _count = 0;
             } else if (Input.GetKeyDown(KeyCode.A) && _count == 0 && _ready) {
+                AudioSource SwordSound = GetComponent<AudioSource>();
+                SwordSound.Play();
                 _attacked = true;
                 _ready = false;
                 animator.SetTrigger("reinforced");
@@ -48,11 +52,15 @@ public class Attack : MonoBehaviour
         } else if (!PlayerManager.instance.fever) {
             AttackReinforced(false);
             if (Input.GetKeyDown(KeyCode.A) && _count == 1 && _ready) {
+                AudioSource SwordSound = GetComponent<AudioSource>();
+                SwordSound.Play();
                 _attacked = true;
                 _ready = false;
                 animator.SetTrigger("second_attack");
                 _count = 0;
             } else if (Input.GetKeyDown(KeyCode.A) && _count == 0 && _ready) {
+                AudioSource SwordSound = GetComponent<AudioSource>();
+                SwordSound.Play();
                 _attacked = true;
                 _ready = false;
                 animator.SetTrigger("first_attack");

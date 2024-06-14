@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6751809435636160856}
   - component: {fileID: -2806726030534616836}
   - component: {fileID: 6899111492180452366}
+  - component: {fileID: -6393547438809515776}
   m_Layer: 11
   m_Name: wolf
   m_TagString: Wolf
@@ -140,6 +141,7 @@ MonoBehaviour:
   fiedlOfVision: 15
   enemyATK: 1.5
   isHit: 0
+  animator: {fileID: -6393547438809515776}
 --- !u!50 &6899111492180452366
 Rigidbody2D:
   serializedVersion: 4
@@ -167,3 +169,24 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!95 &-6393547438809515776
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8421654813026323168}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 73bea979f779a2447bf597253c1ffc5d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
